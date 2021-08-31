@@ -1,6 +1,8 @@
 package com.example.taskmaster;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,44 +40,44 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button labButton=findViewById(R.id.finishLab27ButtonId);
-        labButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent transferToDetailsTask=new Intent(MainActivity.this,TaskDetails.class);
-                String taskValue=labButton.getText().toString();
-                transferToDetailsTask.putExtra("taskTitle",taskValue);
-                startActivity(transferToDetailsTask);
-
-
-            }
-        });
-
-        Button codeButton=findViewById(R.id.finishCode27ButtonId);
-        codeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent transferToDetailsTask=new Intent(MainActivity.this,TaskDetails.class);
-                String taskValue=codeButton.getText().toString();
-                transferToDetailsTask.putExtra("taskTitle",taskValue);
-                startActivity(transferToDetailsTask);
-
-
-            }
-        });
-
-        Button readButton=findViewById(R.id.readButton);
-        readButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent transferToDetailsTask=new Intent(MainActivity.this,TaskDetails.class);
-                String taskValue=readButton.getText().toString();
-                transferToDetailsTask.putExtra("taskTitle",taskValue);
-                startActivity(transferToDetailsTask);
-
-
-            }
-        });
+//        Button labButton=findViewById(R.id.finishLab27ButtonId);
+//        labButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent transferToDetailsTask=new Intent(MainActivity.this,TaskDetails.class);
+//                String taskValue=labButton.getText().toString();
+//                transferToDetailsTask.putExtra("taskTitle",taskValue);
+//                startActivity(transferToDetailsTask);
+//
+//
+//            }
+//        });
+//
+//        Button codeButton=findViewById(R.id.finishCode27ButtonId);
+//        codeButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent transferToDetailsTask=new Intent(MainActivity.this,TaskDetails.class);
+//                String taskValue=codeButton.getText().toString();
+//                transferToDetailsTask.putExtra("taskTitle",taskValue);
+//                startActivity(transferToDetailsTask);
+//
+//
+//            }
+//        });
+//
+//        Button readButton=findViewById(R.id.readButton);
+//        readButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent transferToDetailsTask=new Intent(MainActivity.this,TaskDetails.class);
+//                String taskValue=readButton.getText().toString();
+//                transferToDetailsTask.putExtra("taskTitle",taskValue);
+//                startActivity(transferToDetailsTask);
+//
+//
+//            }
+//        });
         Button goToSettingButton=findViewById(R.id.goToSettingId);
         goToSettingButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +86,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(transferToDetailsTask);
             }
         });
+        ArrayList<TaskClass> allTasks=new ArrayList<TaskClass>();
+        allTasks.add(new TaskClass("lab assessment","solving the lab at the time","assigned"));
+        allTasks.add(new TaskClass("code assessment","solving the code at the time","in progress"));
+        allTasks.add(new TaskClass("read assessment","solving the read at the time","complete"));
+        //get
+        RecyclerView allTaskRecuclerView=findViewById(R.id.taskRecyclerView);
+        allTaskRecuclerView.setLayoutManager(new LinearLayoutManager(this));
+        allTaskRecuclerView.setAdapter(new TaskAdapter(allTasks));
 
     }
 //
