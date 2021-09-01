@@ -1,5 +1,6 @@
 package com.example.taskmaster;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,16 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         public TaskViewHolder(@NotNull View itemView) {
             super(itemView);
             this.itemView=itemView;
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent goToDetailsPagePutExtra=new Intent(v.getContext(),TaskDetails.class);
+                    goToDetailsPagePutExtra.putExtra("taskNameClickListener",task.taskTitle);
+                    goToDetailsPagePutExtra.putExtra("taskBodyClickListener",task.taskBody);
+                    goToDetailsPagePutExtra.putExtra("taskStateClickListener",task.taskState);
+                    v.getContext().startActivity(goToDetailsPagePutExtra);
+                }
+            });
         }
     }
 

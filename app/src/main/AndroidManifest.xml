@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Taskmaster">
-        <activity android:name=".SettingsPage"></activity>
+        <activity android:name=".SettingsPage"
+
+            android:parentActivityName=".MainActivity"
+            ></activity>
         <activity android:name=".TaskDetails" />
         <activity android:name=".AllTaskes" />
         <activity android:name=".AddTaske" />
