@@ -78,32 +78,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.176" />
 
-    <Button
-        android:id="@+id/finishLab27ButtonId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="labAss"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.406"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/goToSettingId"
-        app:layout_constraintVertical_bias="0.514" />
-
-    <Button
-        android:id="@+id/readButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="246dp"
-        tools:layout_editor_absoluteY="610dp" />
-
-    <Button
-        android:id="@+id/finishCode27ButtonId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Code27"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="614dp" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
