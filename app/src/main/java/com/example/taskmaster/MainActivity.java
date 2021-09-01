@@ -40,44 +40,44 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        Button labButton=findViewById(R.id.finishLab27ButtonId);
-//        labButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent transferToDetailsTask=new Intent(MainActivity.this,TaskDetails.class);
-//                String taskValue=labButton.getText().toString();
-//                transferToDetailsTask.putExtra("taskTitle",taskValue);
-//                startActivity(transferToDetailsTask);
-//
-//
-//            }
-//        });
-//
-//        Button codeButton=findViewById(R.id.finishCode27ButtonId);
-//        codeButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent transferToDetailsTask=new Intent(MainActivity.this,TaskDetails.class);
-//                String taskValue=codeButton.getText().toString();
-//                transferToDetailsTask.putExtra("taskTitle",taskValue);
-//                startActivity(transferToDetailsTask);
-//
-//
-//            }
-//        });
-//
-//        Button readButton=findViewById(R.id.readButton);
-//        readButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent transferToDetailsTask=new Intent(MainActivity.this,TaskDetails.class);
-//                String taskValue=readButton.getText().toString();
-//                transferToDetailsTask.putExtra("taskTitle",taskValue);
-//                startActivity(transferToDetailsTask);
-//
-//
-//            }
-//        });
+        Button labButton=findViewById(R.id.finishLab27ButtonId);
+        labButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent transferToDetailsTask=new Intent(MainActivity.this,TaskDetails.class);
+                String taskValue=labButton.getText().toString();
+                transferToDetailsTask.putExtra("taskTitle",taskValue);
+                startActivity(transferToDetailsTask);
+
+
+            }
+        });
+
+        Button codeButton=findViewById(R.id.finishCode27ButtonId);
+        codeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent transferToDetailsTask=new Intent(MainActivity.this,TaskDetails.class);
+                String taskValue=codeButton.getText().toString();
+                transferToDetailsTask.putExtra("taskTitle",taskValue);
+                startActivity(transferToDetailsTask);
+
+
+            }
+        });
+
+        Button readButton=findViewById(R.id.readButton);
+        readButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent transferToDetailsTask=new Intent(MainActivity.this,TaskDetails.class);
+                String taskValue=readButton.getText().toString();
+                transferToDetailsTask.putExtra("taskTitle",taskValue);
+                startActivity(transferToDetailsTask);
+
+
+            }
+        });
         Button goToSettingButton=findViewById(R.id.goToSettingId);
         goToSettingButton.setOnClickListener(new View.OnClickListener() {
             @Override
