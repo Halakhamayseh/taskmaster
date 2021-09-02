@@ -99,17 +99,7 @@ public class MainActivity extends AppCompatActivity {
 //        allTaskRecuclerView.setLayoutManager(new LinearLayoutManager(this));
 //        allTaskRecuclerView.setAdapter(new TaskAdapter(allTasks));
 
-        //show the data from dataBase lab29//
 
-//        DatabaseTask db = Room.databaseBuilder(getApplicationContext(),
-////                DatabaseTask.class, "database-name").build();
-        DatabaseTask db =  Room.databaseBuilder(getApplicationContext(), DatabaseTask.class, "taskDatabase").allowMainThreadQueries()
-                .build();
-        TaskDao taskDao = db.taskDao();
-        List<TaskClass> task = taskDao.getAll();
-        RecyclerView allTaskRecuclerView=findViewById(R.id.taskRecyclerView);
-        allTaskRecuclerView.setLayoutManager(new LinearLayoutManager(this));
-        allTaskRecuclerView.setAdapter(new TaskAdapter(task));
 
     }
 //
@@ -124,9 +114,20 @@ public class MainActivity extends AppCompatActivity {
         String userNameString=sharedPreferences.getString("userName","user");
         TextView userNameView=findViewById(R.id.viewUserNameId);
         userNameView.setText(userNameString);
-
-
-
+        //show the data from dataBase lab29//
+        //get RecyclerView by id
+        RecyclerView allTaskRecuclerView=findViewById(R.id.taskRecyclerView);
+        // get database name it as in add task taskDatabase
+        DatabaseTask db =  Room.databaseBuilder(getApplicationContext(), DatabaseTask.class, "taskDatabase").allowMainThreadQueries()
+                .build();
+        //get doa function
+        TaskDao taskDao = db.taskDao();
+        //store the all data from database in array
+        List<TaskClass> task = taskDao.getAll();
+        //set layout which it is the main
+        allTaskRecuclerView.setLayoutManager(new LinearLayoutManager(this));
+        //set Adapter and pass to it the object
+        allTaskRecuclerView.setAdapter(new TaskAdapter(task));
 
     }
 
