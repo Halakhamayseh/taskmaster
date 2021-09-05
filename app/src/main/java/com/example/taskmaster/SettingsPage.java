@@ -2,6 +2,7 @@ package com.example.taskmaster;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -30,6 +31,8 @@ public class SettingsPage extends AppCompatActivity {
                 String userName=userNameInput.getText().toString();
                 sharedPreferencesEdit.putString("userName",userName);
                 sharedPreferencesEdit.apply();
+                Intent transferToMainActivity=new Intent(SettingsPage.this,MainActivity.class);
+                startActivity(transferToMainActivity);
             }
         });
     }
