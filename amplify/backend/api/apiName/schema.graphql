@@ -1,0 +1,6 @@
+type TaskMaster @model {
+  id: ID!
+  taskTitle: String!
+  taskBody: String!
+  taskState: String
+}
