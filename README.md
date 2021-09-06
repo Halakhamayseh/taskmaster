@@ -64,3 +64,11 @@ Refactor your homepage’s RecyclerView to display all Task entities in your dat
 
 Detail Page
 Ensure that the description and status of a tapped task are also displayed on the detail page, in addition to the title. (Note that you can accomplish this by passing along the entire Task entity, or by passing along only its ID in the intent.)
+
+### Lab: 30 - Espresso and Polish
+Espresso Testing
+Add Espresso to your application, and use it to test basic functionality of the main components of your application.
+![settingInputUserTest](screenshots/MainActivityTest.PNG)
+
+![settingInputUserTest](screenshots/settingInputUserTest.PNG)
+
