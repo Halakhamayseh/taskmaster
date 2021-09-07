@@ -10,22 +10,24 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amplifyframework.datastore.generated.model.TaskMaster;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
-    List<TaskClass> allTasks=new ArrayList<TaskClass>();
+    ArrayList<TaskMaster> allTasks= new ArrayList<>();
 
-    public TaskAdapter(List<TaskClass> allTasks) {
+    public TaskAdapter(ArrayList<TaskMaster> allTasks) {
         this.allTasks = allTasks;
     }
 
 
     public static class TaskViewHolder extends RecyclerView.ViewHolder{
         // the model object
-        public TaskClass task;
+        public TaskMaster task;
         //view object
         View itemView;
 
@@ -36,9 +38,9 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
                 @Override
                 public void onClick(View v) {
                     Intent goToDetailsPagePutExtra=new Intent(v.getContext(),TaskDetails.class);
-                    goToDetailsPagePutExtra.putExtra("taskNameClickListener",task.taskTitle);
-                    goToDetailsPagePutExtra.putExtra("taskBodyClickListener",task.taskBody);
-                    goToDetailsPagePutExtra.putExtra("taskStateClickListener",task.taskState);
+                    goToDetailsPagePutExtra.putExtra("taskNameClickListener",task.getTaskTitle());
+                    goToDetailsPagePutExtra.putExtra("taskBodyClickListener",task.getTaskBody());
+                    goToDetailsPagePutExtra.putExtra("taskStateClickListener",task.getTaskState());
                     v.getContext().startActivity(goToDetailsPagePutExtra);
                 }
             });
@@ -59,9 +61,9 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         TextView taskTitle=holder.itemView.findViewById(R.id.taskTitelId);
         TextView taskBody=holder.itemView.findViewById(R.id.taskBodyId);
         TextView taskState=holder.itemView.findViewById(R.id.taskStateId);
-        taskTitle.setText(holder.task.taskTitle);
-        taskBody.setText(holder.task.taskBody);
-        taskState.setText(holder.task.taskState);
+        taskTitle.setText(holder.task.getTaskTitle());
+        taskBody.setText(holder.task.getTaskBody());
+        taskState.setText(holder.task.getTaskState());
 
     }
 
