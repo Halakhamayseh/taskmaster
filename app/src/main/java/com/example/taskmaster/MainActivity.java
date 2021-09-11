@@ -21,9 +21,11 @@ import android.widget.Toast;
 
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
+import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.TaskMaster;
+import com.amplifyframework.datastore.generated.model.Team;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +41,40 @@ public class MainActivity extends AppCompatActivity {
             // Add these lines to add the AWSApiPlugin plugins
             Amplify.addPlugin(new AWSApiPlugin());
             Amplify.configure(getApplicationContext());
+            ///////////to add three hard coding to team /////////////////
+//                     Team team = Team.builder()
+//                        .name("First team")
+//                        .build();
+//
+//                Amplify.API.mutate(
+//                        ModelMutation.create(team),
+//                        response -> Log.i("MyAmplifyApp", "Added Todo with id: " + response.getData().getId()),
+//                        error -> Log.e("MyAmplifyApp", "Create failed", error)
+//                );
+
+            /////second team
+
+//                Team teamTow = Team.builder()
+//                        .name("Tow team")
+//                        .build();
+//
+//                Amplify.API.mutate(
+//                        ModelMutation.create(teamTow),
+//                        response -> Log.i("MyAmplifyApp", "Added Todo with id: " + response.getData().getId()),
+//                        error -> Log.e("MyAmplifyApp", "Create failed", error)
+//                );
+
+            //////third team hard coby
+
+//                Team teamThree = Team.builder()
+//                        .name("Three team")
+//                        .build();
+//
+//                Amplify.API.mutate(
+//                        ModelMutation.create(teamThree),
+//                        response -> Log.i("MyAmplifyApp", "Added Todo with id: " + response.getData().getId()),
+//                        error -> Log.e("MyAmplifyApp", "Create failed", error)
+//                );
 
             Log.i("MyAmplifyApp", "Initialized Amplify");
         } catch (AmplifyException error) {
@@ -176,24 +212,24 @@ public class MainActivity extends AppCompatActivity {
 
 
         /// use amplify list to get data
-        Amplify.API.query(
-                ModelQuery.list(TaskMaster.class),
-                response -> {
-                    ///looping through data to render it
-                    for (TaskMaster taskMaster : response.getData()) {
-                        Log.i("MyAmplifyApp", taskMaster.getTaskTitle());
-                        Log.i("MyAmplifyApp", taskMaster.getTaskBody());
-                        Log.i("MyAmplifyApp", taskMaster.getTaskState());
-                        ///add new data to array
-                        alltaskFromamplify.add(taskMaster);
-
-                    }
-                    //handel promise and wait to get all data
-                    handler.sendEmptyMessage(1);
-                    Log.i("MyAmplifyApp", "outsoid the loop");
-                },
-                error -> Log.e("MyAmplifyApp", "Query failure", error)
-        );
+//        Amplify.API.query(
+//                ModelQuery.list(TaskMaster.class),
+//                response -> {
+//                    ///looping through data to render it
+//                    for (TaskMaster taskMaster : response.getData()) {
+//                        Log.i("MyAmplifyApp", taskMaster.getTaskTitle());
+//                        Log.i("MyAmplifyApp", taskMaster.getTaskBody());
+//                        Log.i("MyAmplifyApp", taskMaster.getTaskState());
+//                        ///add new data to array
+//                        alltaskFromamplify.add(taskMaster);
+//
+//                    }
+//                    //handel promise and wait to get all data
+//                    handler.sendEmptyMessage(1);
+//                    Log.i("MyAmplifyApp", "outsoid the loop");
+//                },
+//                error -> Log.e("MyAmplifyApp", "Query failure", error)
+//        );
 
     }
 

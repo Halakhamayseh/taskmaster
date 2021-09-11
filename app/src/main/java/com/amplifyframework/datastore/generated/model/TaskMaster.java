@@ -1,5 +1,6 @@
 package com.amplifyframework.datastore.generated.model;
 
+import com.amplifyframework.core.model.annotations.BelongsTo;
 import com.amplifyframework.core.model.temporal.Temporal;
 
 import java.util.List;
@@ -19,15 +20,18 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 /** This is an auto generated class representing the TaskMaster type in your schema. */
 @SuppressWarnings("all")
 @ModelConfig(pluralName = "TaskMasters")
+@Index(name = "byTask", fields = {"teamId","taskTitle"})
 public final class TaskMaster implements Model {
   public static final QueryField ID = field("TaskMaster", "id");
   public static final QueryField TASK_TITLE = field("TaskMaster", "taskTitle");
   public static final QueryField TASK_BODY = field("TaskMaster", "taskBody");
   public static final QueryField TASK_STATE = field("TaskMaster", "taskState");
+  public static final QueryField TEAMS = field("TaskMaster", "teamId");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String taskTitle;
   private final @ModelField(targetType="String", isRequired = true) String taskBody;
   private final @ModelField(targetType="String") String taskState;
+  private final @ModelField(targetType="Team", isRequired = true) @BelongsTo(targetName = "teamId", type = Team.class) Team teams;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   public String getId() {
@@ -46,6 +50,10 @@ public final class TaskMaster implements Model {
       return taskState;
   }
   
+  public Team getTeams() {
+      return teams;
+  }
+  
   public Temporal.DateTime getCreatedAt() {
       return createdAt;
   }
@@ -54,11 +62,12 @@ public final class TaskMaster implements Model {
       return updatedAt;
   }
   
-  private TaskMaster(String id, String taskTitle, String taskBody, String taskState) {
+  private TaskMaster(String id, String taskTitle, String taskBody, String taskState, Team teams) {
     this.id = id;
     this.taskTitle = taskTitle;
     this.taskBody = taskBody;
     this.taskState = taskState;
+    this.teams = teams;
   }
   
   @Override
@@ -73,6 +82,7 @@ public final class TaskMaster implements Model {
               ObjectsCompat.equals(getTaskTitle(), taskMaster.getTaskTitle()) &&
               ObjectsCompat.equals(getTaskBody(), taskMaster.getTaskBody()) &&
               ObjectsCompat.equals(getTaskState(), taskMaster.getTaskState()) &&
+              ObjectsCompat.equals(getTeams(), taskMaster.getTeams()) &&
               ObjectsCompat.equals(getCreatedAt(), taskMaster.getCreatedAt()) &&
               ObjectsCompat.equals(getUpdatedAt(), taskMaster.getUpdatedAt());
       }
@@ -85,6 +95,7 @@ public final class TaskMaster implements Model {
       .append(getTaskTitle())
       .append(getTaskBody())
       .append(getTaskState())
+      .append(getTeams())
       .append(getCreatedAt())
       .append(getUpdatedAt())
       .toString()
@@ -99,6 +110,7 @@ public final class TaskMaster implements Model {
       .append("taskTitle=" + String.valueOf(getTaskTitle()) + ", ")
       .append("taskBody=" + String.valueOf(getTaskBody()) + ", ")
       .append("taskState=" + String.valueOf(getTaskState()) + ", ")
+      .append("teams=" + String.valueOf(getTeams()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
       .append("updatedAt=" + String.valueOf(getUpdatedAt()))
       .append("}")
@@ -132,6 +144,7 @@ public final class TaskMaster implements Model {
       id,
       null,
       null,
+      null,
       null
     );
   }
@@ -140,7 +153,8 @@ public final class TaskMaster implements Model {
     return new CopyOfBuilder(id,
       taskTitle,
       taskBody,
-      taskState);
+      taskState,
+      teams);
   }
   public interface TaskTitleStep {
     TaskBodyStep taskTitle(String taskTitle);
@@ -148,7 +162,12 @@ public final class TaskMaster implements Model {
   
 
   public interface TaskBodyStep {
-    BuildStep taskBody(String taskBody);
+    TeamsStep taskBody(String taskBody);
+  }
+  
+
+  public interface TeamsStep {
+    BuildStep teams(Team teams);
   }
   
 
@@ -159,10 +178,11 @@ public final class TaskMaster implements Model {
   }
   
 
-  public static class Builder implements TaskTitleStep, TaskBodyStep, BuildStep {
+  public static class Builder implements TaskTitleStep, TaskBodyStep, TeamsStep, BuildStep {
     private String id;
     private String taskTitle;
     private String taskBody;
+    private Team teams;
     private String taskState;
     @Override
      public TaskMaster build() {
@@ -172,7 +192,8 @@ public final class TaskMaster implements Model {
           id,
           taskTitle,
           taskBody,
-          taskState);
+          taskState,
+          teams);
     }
     
     @Override
@@ -183,9 +204,16 @@ public final class TaskMaster implements Model {
     }
     
     @Override
-     public BuildStep taskBody(String taskBody) {
+     public TeamsStep taskBody(String taskBody) {
         Objects.requireNonNull(taskBody);
         this.taskBody = taskBody;
+        return this;
+    }
+    
+    @Override
+     public BuildStep teams(Team teams) {
+        Objects.requireNonNull(teams);
+        this.teams = teams;
         return this;
     }
     
@@ -207,10 +235,11 @@ public final class TaskMaster implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String taskTitle, String taskBody, String taskState) {
+    private CopyOfBuilder(String id, String taskTitle, String taskBody, String taskState, Team teams) {
       super.id(id);
       super.taskTitle(taskTitle)
         .taskBody(taskBody)
+        .teams(teams)
         .taskState(taskState);
     }
     
@@ -222,6 +251,11 @@ public final class TaskMaster implements Model {
     @Override
      public CopyOfBuilder taskBody(String taskBody) {
       return (CopyOfBuilder) super.taskBody(taskBody);
+    }
+    
+    @Override
+     public CopyOfBuilder teams(Team teams) {
+      return (CopyOfBuilder) super.teams(teams);
     }
     
     @Override

@@ -9,12 +9,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.TaskMaster;
+import com.amplifyframework.datastore.generated.model.Team;
 
 import java.util.List;
 
@@ -29,6 +31,22 @@ public class AddTaske extends AppCompatActivity {
         EditText taskBodyInputAddPage=findViewById(R.id.bodyIdInputAdd);
         EditText taskStateInputAddPage=findViewById(R.id.stateInsideAddId);
 
+        //get add RadioButton  by id lab33
+
+//        RadioButton RadioButtonFirstTeam=findViewById(R.id.firstTeamIdAdd);
+//        RadioButton RadioButtonSecondTeam=findViewById(R.id.towTeamIdAdd);
+//        RadioButton RadioButtonThirdTeam=findViewById(R.id.threeTeamIdAdd);
+        ////////////////////////////first try to get team name
+        //                Team team = Team.builder()
+//                        .name""
+//                        .build();
+//
+//                Amplify.API.mutate(
+//                        ModelMutation.create(taskMaster),
+//                        response -> Log.i("MyAmplifyApp", "Added Todo with id: " + response.getData().getId()),
+//                        error -> Log.e("MyAmplifyApp", "Create failed", error)
+//                );
+        ///////////////////////
          //get add button by id
         Button addTaskButton=findViewById(R.id.buttonAdd);
         addTaskButton.setOnClickListener(new View.OnClickListener() {
@@ -54,21 +72,22 @@ public class AddTaske extends AppCompatActivity {
 //                taskTotalAddPage.setText("Total task: "+getTask.size());
 
                 //lab32
-
-                TaskMaster taskMaster = TaskMaster.builder()
-                        .taskTitle(taskTitleInputAddPage.getText().toString())
-                        .taskBody(taskBodyInputAddPage.getText().toString())
-                        .taskState(taskStateInputAddPage.getText().toString())
-                        .build();
-
-                Amplify.API.mutate(
-                        ModelMutation.create(taskMaster),
-                        response -> Log.i("MyAmplifyApp", "Added Todo with id: " + response.getData().getId()),
-                        error -> Log.e("MyAmplifyApp", "Create failed", error)
-                );
+//                TaskMaster taskMaster = TaskMaster.builder()
+//                        .taskTitle(taskTitleInputAddPage.getText().toString())
+//                        .taskBody(taskBodyInputAddPage.getText().toString())
+//                        .teams()
+//                        .taskState(taskStateInputAddPage.getText().toString())
+//                        .build();
+//
+//                Amplify.API.mutate(
+//                        ModelMutation.create(taskMaster),
+//                        response -> Log.i("MyAmplifyApp", "Added Todo with id: " + response.getData().getId()),
+//                        error -> Log.e("MyAmplifyApp", "Create failed", error)
+//                );
 
                 Intent transferToMainTask=new Intent(AddTaske.this,MainActivity.class);
                 startActivity(transferToMainTask);
+
             }
 
         });
