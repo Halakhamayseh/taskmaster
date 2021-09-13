@@ -25,6 +25,7 @@ import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
+import com.amplifyframework.auth.options.AuthSignOutOptions;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.TaskMaster;
@@ -44,48 +45,21 @@ public class MainActivity extends AppCompatActivity {
             // Add these lines to add the AWSApiPlugin plugins
             Amplify.addPlugin(new AWSApiPlugin());
             // Add this line, to include the Auth plugin.
-//            Amplify.addPlugin(new AWSCognitoAuthPlugin());
+            Amplify.addPlugin(new AWSCognitoAuthPlugin());
             Amplify.configure(getApplicationContext());
-            ///////////to add three hard coding to team /////////////////
-//                     Team team = Team.builder()
-//                        .name("First team")
-//                        .build();
-//
-//                Amplify.API.mutate(
-//                        ModelMutation.create(team),
-//                        response -> Log.i("MyAmplifyApp", "Added Todo with id: " + response.getData().getId()),
-//                        error -> Log.e("MyAmplifyApp", "Create failed", error)
-//                );
 
-            /////second team
+            Amplify.Auth.signInWithWebUI(
+                    this,
+                    result -> Log.i("AuthQuickStart", result.toString()),
+                    error -> Log.e("AuthQuickStart", error.toString())
+            );
 
-//                Team teamTow = Team.builder()
-//                        .name("Tow team")
-//                        .build();
-//
-//                Amplify.API.mutate(
-//                        ModelMutation.create(teamTow),
-//                        response -> Log.i("MyAmplifyApp", "Added Todo with id: " + response.getData().getId()),
-//                        error -> Log.e("MyAmplifyApp", "Create failed", error)
-//                );
-
-            //////third team hard coby
-
-//                Team teamThree = Team.builder()
-//                        .name("Three team")
-//                        .build();
-//
-//                Amplify.API.mutate(
-//                        ModelMutation.create(teamThree),
-//                        response -> Log.i("MyAmplifyApp", "Added Todo with id: " + response.getData().getId()),
-//                        error -> Log.e("MyAmplifyApp", "Create failed", error)
-//                );
 
             Log.i("MyAmplifyApp", "Initialized Amplify");
         } catch (AmplifyException error) {
             Log.e("MyAmplifyApp", "Could not initialize Amplify", error);
         }
-
+//manual auth
 //        Amplify.Auth.fetchAuthSession(
 //                result -> Log.i("AmplifyQuickstart", result.toString()),
 //                error -> Log.e("AmplifyQuickstart", error.toString())
@@ -125,44 +99,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        Button labButton=findViewById(R.id.finishLab27ButtonId);
-//        labButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent transferToDetailsTask=new Intent(MainActivity.this,TaskDetails.class);
-//                String taskValue=labButton.getText().toString();
-//                transferToDetailsTask.putExtra("taskTitle",taskValue);
-//                startActivity(transferToDetailsTask);
-//
-//
-//            }
-//        });
-//
-//        Button codeButton=findViewById(R.id.finishCode27ButtonId);
-//        codeButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent transferToDetailsTask=new Intent(MainActivity.this,TaskDetails.class);
-//                String taskValue=codeButton.getText().toString();
-//                transferToDetailsTask.putExtra("taskTitle",taskValue);
-//                startActivity(transferToDetailsTask);
-//
-//
-//            }
-//        });
-//
-//        Button readButton=findViewById(R.id.readButton);
-//        readButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent transferToDetailsTask=new Intent(MainActivity.this,TaskDetails.class);
-//                String taskValue=readButton.getText().toString();
-//                transferToDetailsTask.putExtra("taskTitle",taskValue);
-//                startActivity(transferToDetailsTask);
-//
-//
-//            }
-//        });
+        //SignOut function
+        Button signOut=findViewById(R.id.signOutId);
+        signOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Amplify.Auth.signOut(
+                        () -> Log.i("AuthQuickstart", "Signed out successfully"),
+                        error -> Log.e("AuthQuickstart", error.toString())
+                );
+//                Amplify.Auth.signOut(
+//                        AuthSignOutOptions.builder().globalSignOut(true).build(),
+//                        () -> Log.i("AuthQuickstart", "Signed out globally"),
+//                        error -> Log.e("AuthQuickstart", error.toString())
+//                );
+
+            }
+
+        });
+
         Button goToSettingButton=findViewById(R.id.goToSettingId);
         goToSettingButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,16 +126,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(transferToDetailsTask);
             }
         });
-        ///show hardCopy//lab27//
-//        ArrayList<TaskClass> allTasks=new ArrayList<TaskClass>();
-//        allTasks.add(new TaskClass("lab assessment","solving the lab at the time","assigned"));
-//        allTasks.add(new TaskClass("code assessment","solving the code at the time","in progress"));
-//        allTasks.add(new TaskClass("read assessment","solving the read at the time","complete"));
-        //get
-//        RecyclerView allTaskRecuclerView=findViewById(R.id.taskRecyclerView);
-//        allTaskRecuclerView.setLayoutManager(new LinearLayoutManager(this));
-//        allTaskRecuclerView.setAdapter(new TaskAdapter(allTasks));
-
 
 
     }
@@ -197,24 +142,6 @@ public class MainActivity extends AppCompatActivity {
         TextView userNameView=findViewById(R.id.viewUserNameId);
         userNameView.setText(userNameString);
 
-
-
-
-        //show the data from dataBase lab29//
-
-        //get RecyclerView by id
-//        RecyclerView allTaskRecuclerView=findViewById(R.id.taskRecyclerView);
-        // get database name it as in add task taskDatabase
-//        DatabaseTask db =  Room.databaseBuilder(getApplicationContext(), DatabaseTask.class, "taskDatabase").allowMainThreadQueries()
-//                .build();
-        //get doa function
-//        TaskDao taskDao = db.taskDao();
-        //store the all data from database in array
-//        List<TaskClass> task = taskDao.getAll();
-        //set layout which it is the main
-//        allTaskRecuclerView.setLayoutManager(new LinearLayoutManager(this));
-        //set Adapter and pass to it the object
-//        allTaskRecuclerView.setAdapter(new TaskAdapter(task));
 
 
 //         show from amplify from log lab32
