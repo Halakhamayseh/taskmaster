@@ -9,6 +9,8 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 public class SettingsPage extends AppCompatActivity {
 
@@ -22,6 +24,9 @@ public class SettingsPage extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Button submitUserNameInfo=findViewById(R.id.submitUsernameButtom);
+
+
+
         submitUserNameInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -29,8 +34,18 @@ public class SettingsPage extends AppCompatActivity {
                 SharedPreferences.Editor sharedPreferencesEdit=sharedPreferences.edit();
                 EditText userNameInput=findViewById(R.id.userNameInputId);
                 String userName=userNameInput.getText().toString();
+
+
+                //send team name to main by sharedPreferences
+                RadioGroup radioGroup=findViewById(R.id.groupRadioButtonFromSettingId);
+                RadioButton radioButton = findViewById(radioGroup.getCheckedRadioButtonId());
+                String radioString=radioButton.getText().toString();
+
                 sharedPreferencesEdit.putString("userName",userName);
+                sharedPreferencesEdit.putString("teamName",radioString);
+//                System.out.println(radioString);
                 sharedPreferencesEdit.apply();
+
                 Intent transferToMainActivity=new Intent(SettingsPage.this,MainActivity.class);
                 startActivity(transferToMainActivity);
             }

@@ -27,10 +27,10 @@
         android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.325"
+        app:layout_constraintHorizontal_bias="0.455"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userNameInputId"
-        app:layout_constraintVertical_bias="0.075" />
+        app:layout_constraintVertical_bias="0.348" />
 
     <TextView
         android:id="@+id/textView7"
@@ -55,4 +55,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.867" />
+
+    <RadioGroup
+        android:id="@+id/groupRadioButtonFromSettingId"
+        android:layout_width="258dp"
+        android:layout_height="124dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.254"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.336">
+
+        <RadioButton
+            android:id="@+id/firstTeamIDSetting"
+            android:layout_width="167dp"
+            android:layout_height="38dp"
+            android:text="First team" />
+
+        <RadioButton
+            android:layout_width="169dp"
+            android:layout_height="wrap_content"
+            android:text="Tow team" />
+
+        <RadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="171dp"
+            android:layout_height="wrap_content"
+            android:text="Three team" />
+    </RadioGroup>
 </androidx.constraintlayout.widget.ConstraintLayout>

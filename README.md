@@ -83,3 +83,18 @@ Modify your Add Task form to save the data entered in as a Task to DynamoDB.
 Homepage
 Refactor your homepage’s RecyclerView to display all Task entities in DynamoDB.
 ![Home Page](screenshots/ssHomePageLab32.PNG)
+
+### Lab: 33 - Related Data
+
+Feature Tasks
+Tasks Are Owned By Teams
+Create a second entity for a team, which has a name and a list of tasks. Update your tasks to be owned by a team.
+
+Manually create three teams by running a mutation exactly three times in your code. (You do NOT need to allow the user to create new teams.)
+
+Add Task Form
+Modify your Add Task form to include either a Spinner or Radio Buttons for which team that task belongs to.
+
+Settings Page
+In addition to a username, allow the user to choose their team on the Settings page. Use that Team to display only that team’s tasks on the homepage.
+![Home Page](screenshots/displayInMain.PNG)
