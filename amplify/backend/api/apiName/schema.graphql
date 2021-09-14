@@ -12,5 +12,6 @@ type TaskMaster @model
   taskTitle: String!
   taskBody: String!
   taskState: String
+  img:String
   teams: Team! @connection(fields: ["teamId"])
 }

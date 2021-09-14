@@ -40,5 +40,11 @@
         ]
       }
     }
+  },
+  "storage": {
+    "taskResource": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
   }
 }
