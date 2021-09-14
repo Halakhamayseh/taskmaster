@@ -30,56 +30,47 @@ import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.TaskMaster;
 import com.amplifyframework.datastore.generated.model.Team;
+import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    public void loginFunction(){
+        Amplify.Auth.signInWithWebUI(
+                this,
+                result -> Log.i("AuthQuickStart", result.toString()),
+                error -> Log.e("AuthQuickStart", error.toString())
+        );
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 ////////////////////////////////
         try {
-            // Add these lines to add the AWSApiPlugin plugins
             Amplify.addPlugin(new AWSApiPlugin());
-            // Add this line, to include the Auth plugin.
             Amplify.addPlugin(new AWSCognitoAuthPlugin());
+            Amplify.addPlugin(new AWSS3StoragePlugin());
             Amplify.configure(getApplicationContext());
 
-            Amplify.Auth.signInWithWebUI(
-                    this,
-                    result -> Log.i("AuthQuickStart", result.toString()),
-                    error -> Log.e("AuthQuickStart", error.toString())
-            );
-
+//            Amplify.Auth.signInWithWebUI(
+//                    this,
+//                    result -> Log.i("AuthQuickStart", result.toString()),
+//                    error -> Log.e("AuthQuickStart", error.toString())
+//            );
+            loginFunction();
 
             Log.i("MyAmplifyApp", "Initialized Amplify");
         } catch (AmplifyException error) {
             Log.e("MyAmplifyApp", "Could not initialize Amplify", error);
         }
-//manual auth
-//        Amplify.Auth.fetchAuthSession(
-//                result -> Log.i("AmplifyQuickstart", result.toString()),
-//                error -> Log.e("AmplifyQuickstart", error.toString())
-//        );
 
-        ///////////////////////////////////////////////// sould be in singup activity
-//        AuthSignUpOptions options = AuthSignUpOptions.builder()
-//                .userAttribute(AuthUserAttributeKey.email(), "khamaysehhala95@yahoo.com")
-//                .build();
-//        Amplify.Auth.signUp("rahma", "Sara@95", options,
-//                result -> Log.i("AuthQuickStart", "Result: " + result.toString()),
-//                error -> Log.e("AuthQuickStart", "Sign up failed", error)
-//        );
-//////////////////////////////////confirmSignUp/////////////
-//        Amplify.Auth.confirmSignUp(
-//                "rahma",
-//                "131698",
-//                result -> Log.i("AuthQuickstart", result.isSignUpComplete() ? "Confirm signUp succeeded" : "Confirm sign up not complete"),
-//                error -> Log.e("AuthQuickstart", error.toString())
-//        );
         Button addTaskButton=findViewById(R.id.buttonADDTASK);
         addTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,15 +96,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Amplify.Auth.signOut(
-                        () -> Log.i("AuthQuickstart", "Signed out successfully"),
+                        () -> {
+                            loginFunction();
+                            Log.i("AuthQuickstart", "Signed out successfully");
+                        },
                         error -> Log.e("AuthQuickstart", error.toString())
                 );
-//                Amplify.Auth.signOut(
-//                        AuthSignOutOptions.builder().globalSignOut(true).build(),
-//                        () -> Log.i("AuthQuickstart", "Signed out globally"),
-//                        error -> Log.e("AuthQuickstart", error.toString())
-//                );
-
             }
 
         });

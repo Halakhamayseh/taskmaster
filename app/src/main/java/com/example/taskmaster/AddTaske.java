@@ -1,9 +1,11 @@
 package com.example.taskmaster;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,12 +21,18 @@ import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.TaskMaster;
 import com.amplifyframework.datastore.generated.model.Team;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AddTaske extends AppCompatActivity {
 
-
+String img="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +88,14 @@ public class AddTaske extends AppCompatActivity {
         ///////////////////////
         //get add button by id
         Button addTaskButton = findViewById(R.id.buttonAdd);
+
+        Button attacedFile = findViewById(R.id.attacedFilId);
+        attacedFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFileFromDevice();
+            }
+        });
         addTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,6 +150,7 @@ public class AddTaske extends AppCompatActivity {
                         .taskTitle(taskTitleInputAddPage.getText().toString())
                         .taskBody(taskBodyInputAddPage.getText().toString())
                         .teams(selectedTeam)
+                        .img(img)
                         .taskState(taskStateInputAddPage.getText().toString())
                         .build();
 
@@ -154,5 +171,50 @@ public class AddTaske extends AppCompatActivity {
         });
 
 
+    }
+
+    private void getFileFromDevice() {
+        Intent chooseFile = new Intent(Intent.ACTION_GET_CONTENT);
+        chooseFile.setType("*/*");
+        chooseFile = Intent.createChooser(chooseFile, "Choose a File");
+        startActivityForResult(chooseFile, 1234);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        File uploadFile = new File(getApplicationContext().getFilesDir(), "uploadFileCopied");
+        try {
+            InputStream exampleInputStream = getContentResolver().openInputStream(Uri.fromFile(uploadFile));
+             img=data.getData().getPath();
+            System.out.println(img);
+            Amplify.Storage.uploadInputStream(
+                    "img"+img,
+                    exampleInputStream,
+                    result -> Log.i("MyAmplifyApp", "Successfully uploaded: " + result.getKey()),
+                    storageFailure -> Log.e("MyAmplifyApp", "Upload failed", storageFailure)
+            );
+        }  catch (FileNotFoundException error) {
+            Log.e("MyAmplifyApp", "Could not find file to open for input stream.", error);
+        }
+//        try {
+//            InputStream exampleInputStream = getContentResolver().openInputStream(data.getData());
+//            OutputStream outputStream= new FileOutputStream(uploadFile);
+//            byte [] buff=new byte[1024];
+//            int length;
+//            while((length=exampleInputStream.read(buff))>0){
+//                outputStream.write(buff,0,length);
+//            }
+//            exampleInputStream.close();
+//            outputStream.close();
+//            Amplify.Storage.uploadFile(
+//                    "attach",
+//                    uploadFile,
+//                    result -> Log.i("MyAmplifyApp", "Successfully uploaded: " + result.getKey()),
+//                    storageFailure -> Log.e("MyAmplifyApp", "Upload failed", storageFailure)
+//            );
+//        }catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 }
