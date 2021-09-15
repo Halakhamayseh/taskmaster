@@ -108,3 +108,15 @@ Allow users to log out of your application.
 ![sign up](screenshots/signuppage.PNG)
 ![confirm](screenshots/confiremCode.PNG)
 ![sign in](screenshots/signIn.PNG)
+
+### Lab: 38 - Notifications
+![Notifications](screenshots/WhatsApp Image 2021-09-15 at 4.23.16 PM.jpeg)
+Feature Tasks
+Notifications on Task Creation
+When a new task is created within a team, alert all users who are a part of that team about that new task.
+
+There are several steps involved in allowing this to work:
+
+Store which team a user is part of in the cloud
+Add a Lambda trigger on task creation
+Use SNS to send a notification as part of that Lambda
