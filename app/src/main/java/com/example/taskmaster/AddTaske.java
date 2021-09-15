@@ -189,7 +189,7 @@ String img="";
              img=data.getData().getPath();
             System.out.println(img);
             Amplify.Storage.uploadInputStream(
-                    "img"+img,
+                    "img",
                     exampleInputStream,
                     result -> Log.i("MyAmplifyApp", "Successfully uploaded: " + result.getKey()),
                     storageFailure -> Log.e("MyAmplifyApp", "Upload failed", storageFailure)
