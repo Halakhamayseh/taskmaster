@@ -15,7 +15,15 @@
             ></activity>
         <activity android:name=".TaskDetails" />
         <activity android:name=".AllTaskes" />
-        <activity android:name=".AddTaske" />
+        <activity android:name=".AddTaske">
+        <intent-filter android:label="add to tasks">
+            <action android:name="android.intent.action.SEND"/>
+
+            <category android:name="android.intent.category.DEFAULT" />
+            <data android:mimeType="text/plain"/>
+        </intent-filter>
+    </activity>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

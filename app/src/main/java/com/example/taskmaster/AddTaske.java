@@ -39,7 +39,15 @@ String img="";
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_taske);
 
-
+       Intent intent=getIntent();
+       if(intent.getType()!=null){
+           Log.i("intent type",intent.getType().toString());
+       }
+       if (intent.getType()!=null&&intent.getType().equals("text/plain")){
+           Log.i("text",intent.getExtras().get(Intent.EXTRA_TEXT).toString());
+           EditText taskBodyInputAddPageIntent = findViewById(R.id.bodyIdInputAdd);
+           taskBodyInputAddPageIntent.setText(intent.getExtras().get(Intent.EXTRA_TEXT).toString());
+       }
         //get add RadioButton  by id lab33
 
 
